@@ -45,11 +45,8 @@ export default {
   methods: {
     getClasses: (size, valid) => {
       let sizeValue, isValidValue;
-
       sizeValue = size ? `form-control-${size}` : null;
-
       isValidValue = valid ? `${valid}` : "invalid";
-
       return `${sizeValue} ${isValidValue}`;
     },
     getIcon: (icon) => (icon ? icon : null),

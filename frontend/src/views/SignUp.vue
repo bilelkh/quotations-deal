@@ -93,15 +93,15 @@
             </div>
           </div>
           <div class="card-body">
-            <form role="form">
+            <form role="form"  @submit.prevent="handleLogin">
               <div class="mb-3">
-                <vsud-input type="text" placeholder="Name" aria-label="Name" />
+                <vsud-input type="text" placeholder="Name" aria-label="Name" v-model="name" />
               </div>
               <div class="mb-3">
-                <vsud-input type="email" placeholder="Email" aria-label="Email" />
+                <vsud-input type="email" placeholder="Email" aria-label="Email"  v-model="email" />
               </div>
               <div class="mb-3">
-                <vsud-input type="password" placeholder="Password" aria-label="Password" />
+                <vsud-input type="password" placeholder="Password" aria-label="Password"  v-model="password" />  
               </div>
               <vsud-checkbox id="flexCheckDefault" checked>
                 I agree the
@@ -127,7 +127,7 @@
       </div>
     </div>
   </div>
-  <app-footer />
+  <app-footer/>
 </template>
 
 <script>
@@ -146,6 +146,10 @@ export default {
     VsudCheckbox,
     VsudButton,
   },
+    data() {
+    
+      return {name:'',email:'',password:'', }
+    },
   created() {
     this.$store.state.settings.hideConfigButton = true;
     this.$store.state.settings.showNavbar = false;
@@ -158,5 +162,35 @@ export default {
     this.$store.state.settings.showSidenav = true;
     this.$store.state.settings.showFooter = true;
   },
+  methods:{
+    handleLogin () {
+        console.log('email: ', this.email)
+        console.log('password: ', this.password)
+        console.log('role: ', this.name)
+
+      // this.message = "";
+      // this.successful = false;
+      // this.loading = true;
+
+      // this.$store.dispatch("auth/register", ).then(
+      //   (data) => {
+      //     this.message = data.message;
+      //     this.successful = true;
+      //     this.loading = false;
+      //   },
+      //   (error) => {
+      //     this.message =
+      //       (error.response &&
+      //         error.response.data &&
+      //         error.response.data.message) ||
+      //       error.message ||
+      //       error.toString();
+      //     this.successful = false;
+      //     this.loading = false;
+      //   }
+      // );
+
+    }
+  }
 };
 </script>
