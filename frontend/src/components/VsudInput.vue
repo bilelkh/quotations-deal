@@ -9,8 +9,12 @@
         class="form-control"
         :class="getClasses(size, valid)"
         :name="name"
-        :id="id"
-        :value="value"
+        v-bind="{
+          ...$attrs,
+          onInput: updateValue,
+        }"
+        :id="uuid"
+        :value="modelValue"
         :placeholder="placeholder"
         :isRequired="isRequired"
       />
@@ -22,6 +26,8 @@
 </template>
 
 <script>
+import SetupFormComponent from '@/features/SetupFormComponent'
+import UniqueID from '@/features/UniqueID'
 export default {
   name: "vsud-input",
   props: {
@@ -41,6 +47,18 @@ export default {
     placeholder: String,
     type: String,
     isRequired: Boolean,
+    modelValue: {
+      type: [String, Number],
+      default: "",
+    },
+  },
+  setup(props, context) {
+    const { updateValue } = SetupFormComponent(props, context);
+    const uuid = UniqueID().getID();
+    return {
+      updateValue,
+      uuid,
+    };
   },
   methods: {
     getClasses: (size, valid) => {
