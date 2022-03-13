@@ -9,14 +9,12 @@
         class="form-control"
         :class="getClasses(size, valid)"
         :name="name"
-        v-bind="{
-          ...$attrs,
-          onInput: updateValue,
-        }"
         :id="uuid"
         :value="modelValue"
         :placeholder="placeholder"
         :isRequired="isRequired"
+        v-bind="$attrs"
+        @input="$emit('update:modelValue', $event.target.value)"
       />
       <span v-if="iconDir === 'right'" class="input-group-text">
         <i :class="getIcon(icon)"></i>
@@ -26,8 +24,8 @@
 </template>
 
 <script>
-import SetupFormComponent from '@/features/SetupFormComponent'
-import UniqueID from '@/features/UniqueID'
+import SetupFormComponent from "@/features/SetupFormComponent";
+import UniqueID from "@/features/UniqueID";
 export default {
   name: "vsud-input",
   props: {

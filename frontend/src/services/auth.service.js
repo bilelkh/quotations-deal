@@ -23,7 +23,7 @@ class AuthService {
   }
 
   register(user) {
-    console.log("===user===",user)
+    console.log("===user===",user.name)
     return axios.post(API_URL + '/users', {
       name: user.name,
       email: user.email,
