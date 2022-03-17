@@ -72,7 +72,7 @@
               </div>
               <p class="text-sm mt-3 mb-0">
                 Already have an account?
-                <router-link :to="'/sign-in'"> Sign in </router-link>
+                <router-link :to="'/'"> Sign in </router-link>
               </p>
             </form>
           </div>
@@ -137,6 +137,7 @@ export default {
           this.message = data.message;
           this.successful = true;
           this.loading = false;
+          this.$router.push("/");
         },
         (error) => {
           this.message =
