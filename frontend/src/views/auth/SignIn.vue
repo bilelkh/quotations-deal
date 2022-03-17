@@ -23,7 +23,7 @@
                       placeholder="Email"
                       name="email"
                       required
-                      v-model="email"
+                      v-model="user.email"
                     />
                     <label>Password</label>
                     <vsud-input
@@ -31,7 +31,7 @@
                       placeholder="Password"
                       name="password"
                       required
-                      v-model="password"
+                      v-model="user.password"
                     />
                     <vsud-switch id="rememberMe" checked>
                       Remember me
@@ -127,9 +127,10 @@ export default {
       loading: false,
       message: "",
       schema,
-      name:"",
+     user:{
       email:"",
       password:"",
+     }
     };
   },
   computed: {
@@ -143,10 +144,9 @@ export default {
     }
   },
   methods: {
-    handleLogin(user) {
-      console.log(this.email, this.password)
+    handleLogin() {
       this.loading = true;
-      this.$store.dispatch("auth/login", user).then(
+      this.$store.dispatch("auth/login", this.user).then(
         () => {
           this.$router.push("/dashboard");
         },

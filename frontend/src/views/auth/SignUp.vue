@@ -35,7 +35,7 @@
                   type="text"
                   placeholder="Name"
                   aria-label="Name"
-                  v-model="name"
+                  v-model="user.name"
                 />
               </div>
               <div class="mb-3">
@@ -43,7 +43,7 @@
                   type="email"
                   placeholder="Email"
                   aria-label="Email"
-                  v-model="email"
+                  v-model="user.email"
                 />
               </div>
               <div class="mb-3">
@@ -51,7 +51,7 @@
                   type="password"
                   placeholder="Password"
                   aria-label="Password"
-                  v-model="password"
+                  v-model="user.password"
                 />
               </div>
               <vsud-checkbox id="flexCheckDefault" checked>
@@ -109,9 +109,12 @@ export default {
   },
   data() {
     return {
-    name:"",
-    email:"",
-    password:"",
+      name: "",
+      user: {
+        name: "",
+        email: "",
+        password: "",
+      },
     };
   },
   computed: {
@@ -125,12 +128,11 @@ export default {
     }
   },
   methods: {
-    handleRegister(user) {
-      console.log(this.name, this.email, this.password)
+    handleRegister() {
       this.message = "";
       this.successful = false;
       this.loading = true;
-      this.$store.dispatch("auth/register", user).then(
+      this.$store.dispatch("auth/register", this.user).then(
         (data) => {
           this.message = data.message;
           this.successful = true;
